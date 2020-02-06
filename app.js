@@ -18,9 +18,9 @@ module.exports = async function(){
     const episodeObjects = responseData._embedded.episodes;
     
     for(let i=0;i<episodeObjects.length;i++){
-        thisEpisode = episodeObjects[i];
+        const thisEpisode = episodeObjects[i];
         
-        payload = {}
+        const payload = {}
 
         if(seasonCount.hasOwnProperty(thisEpisode.season.toString())){
             seasonCount[thisEpisode.season.toString()] += 1;
@@ -60,22 +60,22 @@ module.exports = async function(){
         episodes.push(episode);         
     }
 
-    totalEpisodes = 0
-    seasonCountArray = Object.keys(seasonCount);    
+    let totalEpisodes = 0
+    const seasonCountArray = Object.keys(seasonCount);    
     for(let i=0;i<seasonCountArray.length;i++){
         totalEpisodes += seasonCount[seasonCountArray[i]];
     }
-    averageEpisodesPerSeason = totalEpisodes / Object.keys(seasonCount).length;
+    const averageEpisodesPerSeason = totalEpisodes / Object.keys(seasonCount).length;
 
-    totalDurationSec = 0
-    minutesCountArray = Object.keys(minutesCount);
+    let totalDurationSec = 0
+    const minutesCountArray = Object.keys(minutesCount);
     for(let i=0;i<minutesCountArray.length;i++){
         totalDurationSec += minutesCount[minutesCountArray[i]];
     }
     // convert minutes to seconds
     totalDurationSec *= 60;
 
-    seriesPayload = {
+    const seriesPayload = {
         'totalDurationSec':totalDurationSec,
         'averageEpisodesPerSeason':averageEpisodesPerSeason,
         'episodes':episodes
