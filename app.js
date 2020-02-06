@@ -21,8 +21,8 @@ module.exports = async function(){
         const thisEpisode = episodeObjects[i];
         
         const payload = {}
-
-        if(seasonCount.hasOwnProperty(thisEpisode.season.toString())){
+        
+        if(Object.prototype.hasOwnProperty.call(seasonCount,thisEpisode.season.toString())){
             seasonCount[thisEpisode.season.toString()] += 1;
             minutesCount[thisEpisode.season.toString()] += thisEpisode.runtime;
         }
@@ -43,8 +43,8 @@ module.exports = async function(){
         // divide milliseconds by 1000 to get epoch time in seconds
         payload["airTimestamp"] = (new Date(thisEpisode.airstamp).getTime())/1000 ;
         
-        let shortSummary = null;
-        if(thisEpisode.hasOwnProperty("summary") && thisEpisode["summary"]!=null){
+        let shortSummary = null;        
+        if(Object.prototype.hasOwnProperty.call(thisEpisode,"summary") && thisEpisode["summary"]!=null){
             // assuming the HTML tags will always be a paragraph tag        
             var html = thisEpisode.summary;
             
